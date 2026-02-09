@@ -6,8 +6,8 @@ import time as tm
 import requests
 
 # ================= TELEGRAM =================
-BOT_TOKEN = "YOUR_TOKEN"
-CHAT_ID = "YOUR_CHAT_ID"
+BOT_TOKEN = "8285971010:AAHCIjGbMbbI2cH7Ls-GnW-oWHEBO_2ZJlI"
+CHAT_ID = "1216470721"
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
@@ -32,7 +32,7 @@ SCAN_INTERVAL_SECONDS = 60
 COOLDOWN_HOURS = 2
 
 # ---- Optional absolute volume filter (disabled) ----
-# MIN_ABSOLUTE_VOLUME = 200000
+MIN_ABSOLUTE_VOLUME = 150000
 
 MARKET_START = time(9, 20)
 MARKET_END   = time(15, 5)
@@ -100,8 +100,8 @@ def scan_once():
         vol_mult = current_volume / avg_volume
 
         # ---- Optional absolute volume filter (OFF) ----
-        # if current_volume < MIN_ABSOLUTE_VOLUME:
-        #     continue
+        if current_volume < MIN_ABSOLUTE_VOLUME:
+            continue
 
         # ---- Bullish + volume spike ----
         if vol_mult < VOLUME_MULTIPLIER:
