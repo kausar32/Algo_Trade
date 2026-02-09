@@ -5,8 +5,8 @@ import time as tm
 import requests
 
 # ================= TELEGRAM =================
-BOT_TOKEN = "YOUR_TOKEN"
-CHAT_ID = "YOUR_CHAT_ID"
+BOT_TOKEN = "8285971010:AAHCIjGbMbbI2cH7Ls-GnW-oWHEBO_2ZJlI"
+CHAT_ID = "1216470721"
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
@@ -41,7 +41,7 @@ NIFTY_150 = [
 ]
 
 VOLUME_MULTIPLIER = 2.6 
-MIN_DAILY_VOL_PCT = 0.002      # 0.2% of avg daily volume
+MIN_DAILY_VOL_PCT = 0.0025     # 0.25% of avg daily volume
 SCAN_INTERVAL_SECONDS = 90
 COOLDOWN_HOURS = 2
 
