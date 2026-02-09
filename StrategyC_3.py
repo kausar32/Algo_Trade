@@ -139,7 +139,7 @@ def scan_once():
             f"Time  : {candle_time.strftime('%H:%M')}\n"
             f"Volume: {int(current_vol)}\n"
             f"Spike : {vol_mult:.2f}× avg\n"
-            f"MinVol: {int(min_abs_vol)}"
+            f"MinVol: {int(min_abs_vol)}\n"
             f"Lookback: {lookback} candles\n"
         )
 
