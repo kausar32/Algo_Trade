@@ -13,8 +13,8 @@ def send_telegram(msg):
     requests.post(url, data={"chat_id": CHAT_ID, "text": msg}, timeout=5)
 
 # ================= CONFIG =================
-# --- NIFTY NEXT 50 ---
-NIFTY_50 = [
+# === NIFTY 50 to 150 ==
+NIFTY_150 = [
 "ABB","ADANIGREEN","ADANIPOWER","AMBUJACEM",
 "AUROPHARMA","BAJAJHLDNG","BANDHANBNK","BERGEPAINT",
 "BHEL","BIOCON","BOSCHLTD","CANBK",
@@ -26,12 +26,23 @@ NIFTY_50 = [
 "NHPC","NMDC","PAGEIND","PEL",
 "PETRONET","PIDILITIND","PNB","RECLTD",
 "SAIL","SBICARD","SHRIRAMFIN","SIEMENS",
-"SRF","TORNTPHARM","TORNTPOWER","VOLTAS"
+"SRF","TORNTPHARM","TORNTPOWER","VOLTAS",
+"ABCAPITAL","ABFRL","ACC","ALKEM","APLAPOLLO",
+"ASHOKLEY","ASTRAL","ATUL","BALKRISIND","BATAINDIA",
+"BEL","BHARATFORG","BIRLACORPN","CANFINHOME",
+"COROMANDEL","CROMPTON","CUMMINSIND","DEEPAKNTR",
+"ESCORTS","EXIDEIND","FEDERALBNK","GLENMARK",
+"GODREJPROP","HINDCOPPER","ICICISEC","IDFCFIRSTB",
+"INDIAMART","INDUSTOWER","IRCTC","JBCHEPHARM",
+"JINDALSAW","JKCEMENT","JMFINANCIL","JSL",
+"KEC","KPITTECH","LALPATHLAB","LAURUSLABS",
+"LUPIN","M&MFIN","MANAPPURAM","METROPOLIS",
+"MPHASIS","MUTHOOTFIN","NAVINFLUOR"
 ]
 
 VOLUME_MULTIPLIER = 2.4 
 MIN_DAILY_VOL_PCT = 0.002      # 0.2% of avg daily volume
-SCAN_INTERVAL_SECONDS = 60
+SCAN_INTERVAL_SECONDS = 90
 COOLDOWN_HOURS = 2
 
 MARKET_START = time(9, 20)
@@ -68,7 +79,7 @@ def scan_once():
     if not (MARKET_START <= now.time() <= MARKET_END):
         return
 
-    for symbol in NIFTY_50:
+    for symbol in NIFTY_150:
         try:
             df = tv.get_hist(symbol, "NSE", Interval.in_5_minute, 50)
         except Exception:
@@ -129,6 +140,7 @@ def scan_once():
             f"Volume: {int(current_vol)}\n"
             f"Spike : {vol_mult:.2f}× avg\n"
             f"MinVol: {int(min_abs_vol)}"
+            f"Lookback: {lookback} candles\n"
         )
 
         print(msg)
