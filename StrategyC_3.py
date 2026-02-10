@@ -1,4 +1,4 @@
-# Uses avg daily volume instead of lietral volume to define minimum absolute volume
+# Uses avg daily volume instead of absolute minimum volume -- >For Midcap 100
 from tvDatafeed import TvDatafeed, Interval
 from datetime import datetime, time, timedelta
 import time as tm
@@ -13,20 +13,8 @@ def send_telegram(msg):
     requests.post(url, data={"chat_id": CHAT_ID, "text": msg}, timeout=5)
 
 # ================= CONFIG =================
-# === NIFTY 50 to 150 ==
-NIFTY_150 = [
-"ABB","ADANIGREEN","ADANIPOWER","AMBUJACEM",
-"AUROPHARMA","BAJAJHLDNG","BANDHANBNK","BERGEPAINT",
-"BHEL","BIOCON","BOSCHLTD","CANBK",
-"CHOLAFIN","COLPAL","CONCOR","DABUR",
-"DLF","GAIL","GODREJCP","HAVELLS",
-"HDFCAMC","HINDPETRO","ICICIGI","ICICIPRULI",
-"IGL","INDHOTEL","JINDALSTEL","JSWENERGY",
-"LTF","MARICO","MOTHERSON","NAUKRI",
-"NHPC","NMDC","PAGEIND","PEL",
-"PETRONET","PIDILITIND","PNB","RECLTD",
-"SAIL","SBICARD","SHRIRAMFIN","SIEMENS",
-"SRF","TORNTPHARM","TORNTPOWER","VOLTAS",
+# === NIFTY 100 to 200 ==
+NIFTY_200 = [
 "ABCAPITAL","ABFRL","ACC","ALKEM","APLAPOLLO",
 "ASHOKLEY","ASTRAL","ATUL","BALKRISIND","BATAINDIA",
 "BEL","BHARATFORG","BIRLACORPN","CANFINHOME",
@@ -37,12 +25,18 @@ NIFTY_150 = [
 "JINDALSAW","JKCEMENT","JMFINANCIL","JSL",
 "KEC","KPITTECH","LALPATHLAB","LAURUSLABS",
 "LUPIN","M&MFIN","MANAPPURAM","METROPOLIS",
-"MPHASIS","MUTHOOTFIN","NAVINFLUOR"
+"MPHASIS","MUTHOOTFIN","NAVINFLUOR","OBEROIRLTY",
+"PERSISTENT","PNBHOUSING","POLYCAB","PVRINOX",
+"RAMCOCEM","RATNAMANI","SBILIFE","SCHAEFFLER",
+"SONATSOFTW","STAR","SYNGENE","TATACHEM",
+"TATAPOWER","THERMAX","TORNTPHARM","TRIDENT",
+"TVSMOTOR","UBL","UJJIVANSFB","UNIONBANK",
+"VINATIORGA","VGUARD","WHIRLPOOL","ZEEL"
 ]
 
-VOLUME_MULTIPLIER = 2.6 
-MIN_DAILY_VOL_PCT = 0.0025     # 0.25% of avg daily volume
-SCAN_INTERVAL_SECONDS = 90
+VOLUME_MULTIPLIER = 2.5 
+MIN_DAILY_VOL_PCT = 0.002     # 0.2% of avg daily volume
+SCAN_INTERVAL_SECONDS = 60
 COOLDOWN_HOURS = 2
 
 MARKET_START = time(9, 20)
@@ -79,7 +73,7 @@ def scan_once():
     if not (MARKET_START <= now.time() <= MARKET_END):
         return
 
-    for symbol in NIFTY_150:
+    for symbol in NIFTY_200:
         try:
             df = tv.get_hist(symbol, "NSE", Interval.in_5_minute, 50)
         except Exception:
