@@ -44,7 +44,6 @@ VOLUME_MULTIPLIER = 2.8
 SCAN_INTERVAL_SECONDS = 60
 COOLDOWN_HOURS = 3
 
-# ---- Optional absolute volume filter (disabled) ----
 MIN_ABSOLUTE_VOLUME = 150000
 
 MARKET_START = time(9, 20)
